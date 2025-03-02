@@ -23,7 +23,7 @@ struct CategoryView: View {
                                     .font(.headline)
                                 Text("Author: \(item.author)")
                                     .font(.subheadline)
-                                Text("Category: \(item.category?.name ?? "Uncategorized")")
+                                Text("Total pages: \(item.totalPages)")
                                     .font(.subheadline)
                             }
                         }

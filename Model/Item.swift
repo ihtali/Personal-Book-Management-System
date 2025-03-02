@@ -4,8 +4,8 @@
 //
 //  Created by Ali, Ihtasham on 06/02/2025.
 //
-import SwiftUI
 import SwiftData
+import Foundation
 
 @Model
 class Item {
