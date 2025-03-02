@@ -10,6 +10,7 @@ import SwiftData
 struct AddBookView: View {
     @Environment(\.modelContext) private var modelContext
     @StateObject private var controller = BookManagement()
+    
     @State private var newTitle: String = ""
     @State private var newAuthor: String = ""
     @State private var newGenre: String = ""
@@ -23,18 +24,27 @@ struct AddBookView: View {
                     TextField("Author", text: $newAuthor)
                     TextField("Genre", text: $newGenre)
                     TextField("Total Pages", text: $newTotalPages)
+                        .keyboardType(.numberPad)
                 }
                 
                 Section {
                     Button("Add Book") {
                         if let totalPages = Int(newTotalPages) {
-                            controller.addItem(title: newTitle, author: newAuthor, genre: newGenre.isEmpty ? nil : newGenre, totalPages: totalPages, to: nil)
+                            controller.addItem(
+                                title: newTitle,
+                                author: newAuthor,
+                                genre: newGenre.isEmpty ? nil : newGenre,
+                                totalPages: totalPages
+                            )
+                            
+                            // Reset input fields after adding the book
                             newTitle = ""
                             newAuthor = ""
                             newGenre = ""
                             newTotalPages = ""
                         }
                     }
+                    .disabled(newTitle.isEmpty || newAuthor.isEmpty || newTotalPages.isEmpty)
                 }
             }
             .navigationTitle("Add Book")
@@ -47,5 +57,6 @@ struct AddBookView: View {
 
 #Preview {
     AddBookView()
-        .modelContainer(for: [Item.self], inMemory: true)
+        .modelContainer(for: [Item.self], inMemory: true) // Removed Category
 }
+

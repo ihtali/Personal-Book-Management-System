@@ -1,4 +1,4 @@
-//
+////
 //  BookManagement.swift
 //  Personal Book Management System
 //
@@ -42,10 +42,11 @@ class BookManagement: ObservableObject {
         }
     }
     
-    func addItem(title: String, author: String, genre: String?, totalPages: Int, to category: Category?) {
+    func addItem(title: String, author: String, genre: String?, totalPages: Int) {
         guard let modelContext = modelContext else { return }
         guard !title.isEmpty else { return }
-        let newItem = Item(title: title, author: author, genre: genre, totalPages: totalPages, category: category)
+        
+        let newItem = Item(title: title, author: author, genre: genre, totalPages: totalPages)
         modelContext.insert(newItem)
         saveContext()
         fetchItems()

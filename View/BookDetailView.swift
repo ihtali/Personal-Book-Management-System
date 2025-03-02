@@ -49,7 +49,12 @@ struct BookDetailView: View {
             TextField("Enter total pages", text: $editTotalPages)
             TextField("Enter pages read", text: $editPagesRead)
             Button("Save") {
-              
+                // Update the item properties with the edited values
+                item.title = editTitle
+                item.author = editAuthor
+                item.genre = editGenre.isEmpty ? nil : editGenre
+                item.totalPages = Int(editTotalPages) ?? item.totalPages
+                item.pagesRead = Int(editPagesRead) ?? item.pagesRead
             }
             Button("Cancel", role: .cancel) {}
         } message: {
@@ -57,4 +62,3 @@ struct BookDetailView: View {
         }
     }
 }
-
