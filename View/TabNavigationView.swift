@@ -10,8 +10,8 @@ enum Tab: String, CaseIterable {
     case library
     case addBook
     case categories
+    case reminders
 }
-
 
 struct TabNavigation: View {
     @State private var selectedTab: Tab = .library
@@ -33,16 +33,23 @@ struct TabNavigation: View {
                 .tag(Tab.addBook)
             
             // Category Tab
-            CategoryView ()
+            CategoryView()
                 .tabItem {
                     Label("Categories", systemImage: "folder")
                 }
                 .tag(Tab.categories)
+            
+            // Reminders Tab
+            RemindersView()
+                .tabItem {
+                    Label("Reminders", systemImage: "bell")
+                }
+                .tag(Tab.reminders)
         }
     }
 }
 
 #Preview {
     TabNavigation()
-        .modelContainer(for: [Item.self], inMemory: true)
+        .modelContainer(for: [Item.self, Category.self], inMemory: true)
 }

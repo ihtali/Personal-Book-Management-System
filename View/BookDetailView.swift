@@ -25,6 +25,10 @@ struct BookDetailView: View {
                 Text("Genre: \(item.genre ?? "N/A")")
                 Text("Total Pages: \(item.totalPages)")
                 Text("Pages Read: \(item.pagesRead)")
+                
+                // Directly use item.dateAdded since it's not optional
+                Text("Date Added: \(formattedDate(item.dateAdded))")
+                
                 ProgressView(value: item.progress)
                     .padding()
             }
@@ -47,18 +51,36 @@ struct BookDetailView: View {
             TextField("Enter author", text: $editAuthor)
             TextField("Enter genre", text: $editGenre)
             TextField("Enter total pages", text: $editTotalPages)
+                .keyboardType(.numberPad)
             TextField("Enter pages read", text: $editPagesRead)
+                .keyboardType(.numberPad)
             Button("Save") {
-                // Update the item properties with the edited values
-                item.title = editTitle
-                item.author = editAuthor
-                item.genre = editGenre.isEmpty ? nil : editGenre
-                item.totalPages = Int(editTotalPages) ?? item.totalPages
-                item.pagesRead = Int(editPagesRead) ?? item.pagesRead
+                // Validate inputs before saving
+                if let totalPages = Int(editTotalPages), let pagesRead = Int(editPagesRead) {
+                    // Update the item properties with the edited values
+                    item.title = editTitle
+                    item.author = editAuthor
+                    item.genre = editGenre.isEmpty ? nil : editGenre
+                    item.totalPages = totalPages
+                    item.pagesRead = pagesRead
+                    
+                    controller.fetchItems()
+                }
+                showEdit = false
             }
-            Button("Cancel", role: .cancel) {}
+            Button("Cancel", role: .cancel) {
+                showEdit = false
+            }
         } message: {
             Text("Edit the details of the book.")
         }
+    }
+    
+    // Helper function to format the date
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
     }
 }

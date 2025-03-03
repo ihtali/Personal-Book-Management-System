@@ -15,16 +15,16 @@ class Item {
     var genre: String?
     var totalPages: Int
     var pagesRead: Int
-    var category: Category?
-
-    init(title: String, author: String, genre: String? = nil, totalPages: Int, category: Category? = nil) {
+    var dateAdded: Date
+    
+    init(title: String, author: String, genre: String? = nil, pagesRead: Int = 0, totalPages: Int, dateAdded: Date) {
         self.id = UUID()
         self.title = title
         self.author = author
         self.genre = genre
         self.totalPages = totalPages
-        self.pagesRead = 0
-        self.category = category
+        self.pagesRead = pagesRead
+        self.dateAdded = dateAdded
     }
 
     var progress: Double {

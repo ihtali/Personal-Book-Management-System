@@ -54,6 +54,3 @@ struct LibraryView: View {
     LibraryView()
         .modelContainer(for: [Item.self], inMemory: true)
 }
-
-////Testing//
-/////

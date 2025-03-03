@@ -42,11 +42,17 @@ class BookManagement: ObservableObject {
         }
     }
     
-    func addItem(title: String, author: String, genre: String?, totalPages: Int) {
+    func addItem(title: String, author: String, genre: String?, totalPages: Int, dateAdded: Date) {
         guard let modelContext = modelContext else { return }
         guard !title.isEmpty else { return }
         
-        let newItem = Item(title: title, author: author, genre: genre, totalPages: totalPages)
+        let newItem = Item(
+            title: title,
+            author: author,
+            genre: genre,
+            totalPages: totalPages,
+            dateAdded: dateAdded
+        )
         modelContext.insert(newItem)
         saveContext()
         fetchItems()

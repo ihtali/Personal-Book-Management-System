@@ -34,10 +34,10 @@ struct AddBookView: View {
                                 title: newTitle,
                                 author: newAuthor,
                                 genre: newGenre.isEmpty ? nil : newGenre,
-                                totalPages: totalPages
+                                totalPages: totalPages,
+                                dateAdded: Date()
                             )
                             
-                            // Reset input fields after adding the book
                             newTitle = ""
                             newAuthor = ""
                             newGenre = ""
@@ -57,6 +57,5 @@ struct AddBookView: View {
 
 #Preview {
     AddBookView()
-        .modelContainer(for: [Item.self], inMemory: true) // Removed Category
+        .modelContainer(for: [Item.self], inMemory: true)
 }
-

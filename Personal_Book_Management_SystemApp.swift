@@ -27,7 +27,7 @@ struct Personal_Book_Management_SystemApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TabNavigation()
+            WelcomeScreen()
                 .modelContainer(sharedModelContainer)
         }
     }
